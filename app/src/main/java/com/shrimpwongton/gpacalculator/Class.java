@@ -6,11 +6,22 @@ package com.shrimpwongton.gpacalculator;
 public class Class {
 
     private String className;
-    private int units;
+    private double units;
+    private double unitWeighted;
     public enum Grades {
         APLUS,AREG,AMINUS,BPLUS,BREG,BMINUS,CPLUS,CREG,CMINUS,DPLUS,DREG,DMINUS,FREG
     }
     Grades grades;
 
+    public double getUnits() {
+        return units;
+    }
 
+    public double getUnitWeighted() {
+        return unitWeighted;
+    }
+
+    public void setUnitWeighted(double unitWeighted) {
+        this.unitWeighted = unitWeighted;
+    }
 }
