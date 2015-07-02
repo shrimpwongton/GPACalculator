@@ -19,6 +19,13 @@ public class Class {
         this.grade = grade;
     }
 
+    public Class(int parentID, String className, double units, double grade) {
+        this.className = className;
+        this.units = units;
+        this.parentID = parentID;
+        this.grade = grade;
+    }
+
     public int getId() {
         return id;
     }

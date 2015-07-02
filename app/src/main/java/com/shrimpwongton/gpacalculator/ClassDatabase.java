@@ -28,8 +28,8 @@ public class ClassDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CLASS_TABLE = "CREATE TABLE " + TABLE_CLASS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_PARENT_ID + " INTEGER,"
-                + KEY_CLASS + " TEXT," + KEY_UNIT + " REAL" + KEY_GRADE + " REAL" + ")";
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_PARENT_ID + " INTEGER,"
+                + KEY_CLASS + " TEXT," + KEY_UNIT + " REAL," + KEY_GRADE + " REAL" + ")";
         db.execSQL(CREATE_CLASS_TABLE);
     }
 
@@ -124,10 +124,10 @@ public class ClassDatabase extends SQLiteOpenHelper {
                 new String[] { String.valueOf(cla.getId())});
     }
 
-    public void deleteClass (Term term) {
+    public void deleteClass (Class cla) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_CLASS, KEY_ID + " = ?",
-                new String[]{String.valueOf(term.getId())});
+                new String[]{String.valueOf(cla.getId())});
         db.close();
     }
 }

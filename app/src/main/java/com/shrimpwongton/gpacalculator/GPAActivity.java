@@ -2,14 +2,18 @@ package com.shrimpwongton.gpacalculator;
 
 import android.app.Application;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,8 +31,12 @@ public class GPAActivity extends ActionBarActivity {
 
     ListView listTerms;
     TextView textView;
+    TextView GPA;
     FloatingActionButton fab;
     GPADatabase database = new GPADatabase(this);
+    ClassDatabase classData = new ClassDatabase(this);
+    ImageView trend;
+    double oldGPA = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +56,14 @@ public class GPAActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        updateTermGPA();
         updateList();
+        updateCumuGPA();
         listTerms.setClickable(true);
         listTerms.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Term t = (Term)listTerms.getItemAtPosition(position);
+                Term t = (Term) listTerms.getItemAtPosition(position);
                 Intent i = new Intent(GPAActivity.this, TermActivity.class);
                 i.putExtra("ID", t.getId());
                 i.putExtra("TERM", t);
@@ -80,6 +90,53 @@ public class GPAActivity extends ActionBarActivity {
         }
     }
 
+    public void updateTermGPA () {
+        ArrayList<Term> allTerms = (ArrayList)database.getAllTerms();
+        double total = 0.0;
+        double totalUnits = 0.0;
+        for ( Term a: allTerms) {
+            ArrayList<Class> classes = (ArrayList)classData.getAllClassesWithParentID(a.getId());
+            for ( Class b: classes) {
+                total += b.getGrade() * b.getUnits();
+                totalUnits += b.getUnits();
+            }
+            a.setGPA(total/totalUnits);
+            database.updateTerm(a);
+            total = 0.0;
+            totalUnits = 0.0;
+        }
+        database.close();
+    }
+
+    public void updateCumuGPA() {
+        GPA = (TextView) findViewById(R.id.GPA);
+        trend = (ImageView) findViewById(R.id.trend);
+        ArrayList<Class> allClasses = (ArrayList)classData.getAllClasses();
+        if ( allClasses.size() == 0 )
+            GPA.setText("- . - -");
+        else {
+            double total = 0.0;
+            double totalUnits = 0.0;
+            for (Class a : allClasses) {
+                total += a.getGrade() * a.getUnits();
+                totalUnits += a.getUnits();
+            }
+            if ( total/totalUnits > oldGPA ) {
+                trend.setImageResource(R.drawable.ic_trending_up_white_24dp);
+                oldGPA = total/totalUnits;
+            }
+            else if ( total/totalUnits < oldGPA ) {
+                trend.setImageResource(R.drawable.ic_trending_down_white_24dp);
+                oldGPA = total/totalUnits;
+            }
+            else {
+                trend.setImageResource(R.drawable.ic_trending_flat_white_24dp);
+                oldGPA = total/totalUnits;
+            }
+            GPA.setText(String.format("%.2f", total / totalUnits));
+        }
+        classData.close();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -95,7 +152,19 @@ public class GPAActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(GPAActivity.this);
+            dialog.setTitle("About");
+            dialog.setMessage("Simple GPA Calculator with multiple terms, and up to 6 classes per term " +
+                    "\n© 2015 Anthony Wong "
+            );
+            dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            dialog.show();
             return true;
         }
 

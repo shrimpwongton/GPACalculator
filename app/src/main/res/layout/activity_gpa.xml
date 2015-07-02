@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@color/primary_dark"
-        android:elevation="2dp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -23,8 +22,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:textColor="@color/textColor"
-        android:textSize="16sp"
-        android:elevation="2dp"/>
+        android:textSize="16sp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,16 +32,28 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:id="@+id/noTermString" />
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cumuGPA"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="12dp"
-        android:text="4.0"
-        android:textColor="@color/textColor"
-        android:textSize="40sp"
-        android:elevation="2dp"/>
+        android:orientation="horizontal"
+        android:layout_below="@+id/cumuGPA">
+        <TextView
+            android:id="@+id/GPA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:text="- . - -"
+            android:textColor="@color/textColor"
+            android:textSize="40sp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_trending_flat_white_24dp"
+            android:id="@+id/trend"
+            android:paddingLeft="16dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

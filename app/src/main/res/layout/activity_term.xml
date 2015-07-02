@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@color/primary_dark"
-        android:elevation="2dp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -19,17 +18,15 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:text="Term"
-        android:elevation="2dp"
         android:textColor="@color/textColor"
         android:id="@+id/term"/>
     <EditText
-        android:layout_width="250dp"
+        android:layout_width="225dp"
         android:layout_height="wrap_content"
         android:id="@+id/editTerm"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:textSize="30sp"
-        android:elevation="2dp"
         android:textColor="@color/textColor"
         android:layout_below="@id/term"
         android:maxLength="9"/>
@@ -73,7 +70,7 @@
                     android:layout_height="40dp">
 
                     <TextView
-                        android:layout_width="200dp"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="@string/className"
                         />
@@ -95,8 +92,8 @@
 
 
                     <EditText
-                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
+                        android:layout_width="150dp"
                         android:id="@+id/class1Class" />
 
                     <EditText
@@ -119,7 +116,7 @@
 
 
                     <EditText
-                        android:layout_width="200dp"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/class2Class" />
 
@@ -144,7 +141,7 @@
 
 
                     <EditText
-                        android:layout_width="200dp"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/class3Class" />
 
@@ -168,7 +165,7 @@
 
 
                     <EditText
-                        android:layout_width="200dp"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/class4Class" />
 
@@ -192,7 +189,7 @@
 
 
                     <EditText
-                        android:layout_width="200dp"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/class5Class" />
 
@@ -216,7 +213,7 @@
 
 
                     <EditText
-                        android:layout_width="200dp"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/class6Class" />
 

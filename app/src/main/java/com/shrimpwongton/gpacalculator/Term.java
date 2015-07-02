@@ -55,14 +55,6 @@ public class Term implements Serializable {
         this.term = term;
     }
 
-    public void addClass(Class newClass) {
-        classes.add(newClass);
-    }
-
-    public void deleteClass() {
-        classes.remove(classes.size() -1);
-    }
-
     public double getGPA() {
         return GPA;
     }
@@ -83,6 +75,6 @@ public class Term implements Serializable {
     public void calculateGPA () { double total = 0.0; for ( Class c : classes ) { total += c.getUnits(); }}
     @Override
     public String toString() {
-        return id + " " + term + "\n" + GPA;
+        return term + "\n" + String.format( "%.2f",  GPA );
     }
 }

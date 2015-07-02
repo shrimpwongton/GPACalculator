@@ -13,15 +13,15 @@ import java.util.List;
  * Created by anthonywong on 6/30/15.
  */
 public class GPADatabase extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION=3;
-    private static final String DATABASE_NAME= "termManager";
+    private static final int DATABASE_VERSION = 3;
+    private static final String DATABASE_NAME = "termManager";
     private static final String TABLE_TERM = "term";
 
     private static final String KEY_ID = "id";
     private static final String KEY_TERM = "term";
     private static final String KEY_GPA = "gpa";
 
-    public GPADatabase (Context context) {
+    public GPADatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -50,10 +50,10 @@ public class GPADatabase extends SQLiteOpenHelper {
 
     public Term getTerm(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_TERM, new String [] {
-            KEY_ID,KEY_TERM,KEY_GPA}, KEY_ID + "=?",
-            new String [] { String.valueOf(id) }, null, null, null, null);
-        if ( cursor != null )
+        Cursor cursor = db.query(TABLE_TERM, new String[]{
+                        KEY_ID, KEY_TERM, KEY_GPA}, KEY_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+        if (cursor != null)
             cursor.moveToFirst();
         Term term = new Term(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getDouble(2));
@@ -67,14 +67,14 @@ public class GPADatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if ( cursor.moveToFirst()) {
-            do{
+        if (cursor.moveToFirst()) {
+            do {
                 Term term = new Term();
                 term.setId(Integer.parseInt(cursor.getString(0)));
                 term.setTerm(cursor.getString(1));
                 term.setGPA(cursor.getDouble(2));
                 termList.add(term);
-            }  while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return termList;
     }
@@ -88,19 +88,29 @@ public class GPADatabase extends SQLiteOpenHelper {
         return cnt;
     }
 
-    public int updateTerm (Term term) {
+    public int updateTerm(Term term) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_TERM, term.getTerm());
         values.put(KEY_GPA, term.getGPA());
         return db.update(TABLE_TERM, values, KEY_ID + " =?",
-                new String[] { String.valueOf(term.getId())});
+                new String[]{String.valueOf(term.getId())});
     }
 
-    public void deleteTerm (Term term) {
+    public void deleteTerm(Term term) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_TERM, KEY_ID + " = ?",
-                new String[] { String.valueOf(term.getId())});
+                new String[]{String.valueOf(term.getId())});
         db.close();
+    }
+
+    public long getLastID() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        long lastId = 0;
+        Cursor c = db.rawQuery("SELECT ROWID from " + TABLE_TERM +" order by id DESC limit 1", null);
+        if (c != null && c.moveToFirst()) {
+            lastId = c.getLong(0); //The 0 is the column index, we only have 1 column, so the index is 0
+        }
+        return lastId;
     }
 }
