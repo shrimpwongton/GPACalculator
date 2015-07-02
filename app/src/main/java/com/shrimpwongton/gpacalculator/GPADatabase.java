@@ -28,7 +28,7 @@ public class GPADatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_GPA_TABLE = "CREATE TABLE " + TABLE_TERM + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TERM + " TEXT,"
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_TERM + " TEXT,"
                 + KEY_GPA + " REAL" + ")";
         db.execSQL(CREATE_GPA_TABLE);
     }
@@ -57,6 +57,7 @@ public class GPADatabase extends SQLiteOpenHelper {
             cursor.moveToFirst();
         Term term = new Term(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getDouble(2));
+        cursor.close();
         return term;
     }
 

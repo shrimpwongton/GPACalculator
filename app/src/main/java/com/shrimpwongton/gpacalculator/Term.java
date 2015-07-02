@@ -1,16 +1,21 @@
 package com.shrimpwongton.gpacalculator;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by anthonywong on 6/29/15.
  */
-public class Term {
+public class Term implements Serializable {
 
     private int id;
     private String term;
     private double GPA;
     private ArrayList<Class> classes;
+    private int mData;
 
     public Term() {
 
@@ -19,6 +24,13 @@ public class Term {
         this.term = term;
         classes = new ArrayList<Class>();
     }
+
+    /*public int describeContents() {
+        return 0;
+    }
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(mData);
+    }*/
 
     public Term(int id, String term, double GPA) {
         this.GPA = GPA;
@@ -71,6 +83,6 @@ public class Term {
     public void calculateGPA () { double total = 0.0; for ( Class c : classes ) { total += c.getUnits(); }}
     @Override
     public String toString() {
-        return term + "                 " + GPA;
+        return id + " " + term + "\n" + GPA;
     }
 }

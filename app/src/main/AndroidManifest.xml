@@ -20,7 +20,8 @@
         <activity
             android:name=".TermActivity"
             android:label="@string/title_activity_term"
-            android:parentActivityName=".GPAActivity" >
+            android:parentActivityName=".GPAActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shrimpwongton.gpacalculator.GPAActivity" />

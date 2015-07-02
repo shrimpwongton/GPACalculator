@@ -13,8 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +35,34 @@ public class GPAActivity extends ActionBarActivity {
         setTitle("GPA Calculator");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gpa);
+        updateList();
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GPAActivity.this, TermActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateList();
+        listTerms.setClickable(true);
+        listTerms.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Term t = (Term)listTerms.getItemAtPosition(position);
+                Intent i = new Intent(GPAActivity.this, TermActivity.class);
+                i.putExtra("ID", t.getId());
+                i.putExtra("TERM", t);
+                startActivity(i);
+            }
+        });
+    }
+
+    public void updateList() {
         listTerms = (ListView) findViewById(R.id.listTerms);
         textView = (TextView) findViewById(R.id.noTermString);
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -43,20 +74,10 @@ public class GPAActivity extends ActionBarActivity {
             ArrayAdapter<Term> adapter = new ArrayAdapter<Term>(GPAActivity.this, R.layout.list_item, terms);
             listTerms.setAdapter(adapter);
         }
-
-        /*Term t1 = new Term("WI15");
-        Term t2 = new Term("FA15");
-        Term t3 = new Term("SP15");
-        database.addTerm(t1);
-        database.addTerm(t2);
-        database.addTerm(t3);*/
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent (GPAActivity.this, TermActivity.class);
-                startActivity(i);
-            }
-        });
+        else
+        {
+            database.close();
+        }
     }
 
     @Override

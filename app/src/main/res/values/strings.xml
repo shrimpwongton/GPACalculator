@@ -9,4 +9,9 @@
     <string name="noTermString">There are currently no terms; press the + button to add a new term.</string>
     <string name="title_activity_term">TermActivity</string>
     <string name="cumuGPA">Cumulative GPA:</string>
+    <string name="action_add_class">Add Class</string>
+    <string name="className">Class Name</string>
+    <string name="Units">Units</string>
+    <string name="Grade">Grade</string>
+    <string name="deleteTerm">Delete Term</string>
 </resources>

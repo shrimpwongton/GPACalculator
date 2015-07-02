@@ -7,21 +7,55 @@ public class Class {
 
     private String className;
     private double units;
-    private double unitWeighted;
-    public enum Grades {
-        APLUS,AREG,AMINUS,BPLUS,BREG,BMINUS,CPLUS,CREG,CMINUS,DPLUS,DREG,DMINUS,FREG
+    private int parentID, id;
+    private double grade;
+
+    public Class () {};
+    public Class(int id, int parentID, String className, double units, double grade) {
+        this.id = id;
+        this.className = className;
+        this.units = units;
+        this.parentID = parentID;
+        this.grade = grade;
     }
-    Grades grades;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public double getUnits() {
         return units;
     }
 
-    public double getUnitWeighted() {
-        return unitWeighted;
+    public String getClassName() {
+        return className;
     }
 
-    public void setUnitWeighted(double unitWeighted) {
-        this.unitWeighted = unitWeighted;
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public void setUnits(double units) {
+        this.units = units;
+    }
+
+    public int getParentID() {
+        return parentID;
+    }
+
+    public void setParentID(int parentID) {
+        this.parentID = parentID;
+    }
+
+    public double getGrade() {
+        return grade;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
     }
 }
