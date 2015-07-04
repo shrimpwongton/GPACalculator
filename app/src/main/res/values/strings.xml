@@ -15,4 +15,5 @@
     <string name="Grade">Grade</string>
     <string name="deleteTerm">Delete Term</string>
     <string name="action_about">About</string>
+    <string name="clearAll">Clear All</string>
 </resources>

@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shrimpwongton.gpacalculator" >
 
+    <supports-screens android:smallScreens="false"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="false"
+        android:requiresSmallestWidthDp="240" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,7 +27,6 @@
             android:name=".TermActivity"
             android:label="@string/title_activity_term"
             android:parentActivityName=".GPAActivity"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

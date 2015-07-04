@@ -95,7 +95,7 @@ public class TermActivity extends ActionBarActivity {
                 c6g = toDouble(class6Grade.getSelectedItem().toString());
                 if ( extras == null) {
                     if (termName.matches("")) {
-                        termText.setError("Term name cannot be empty");
+                        termText.setError("Please add a term name.");
                     }
                     else if (
                             !((!class1NameText.matches("") && !class1UnitText.matches("")) ||
@@ -105,7 +105,7 @@ public class TermActivity extends ActionBarActivity {
                                     (!class5NameText.matches("") && !class5UnitText.matches("")) ||
                                     (!class6NameText.matches("") && !class6UnitText.matches("")))
                             ) {
-                        Toast.makeText(TermActivity.this, "Must fill in at least 1 class", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TermActivity.this, "Please add at least 1 class", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         Term t = new Term(termName);
@@ -121,7 +121,7 @@ public class TermActivity extends ActionBarActivity {
                 {
                     termName = termText.getText().toString();
                     if ( termName.matches("")) {
-                        termText.setError("Term name cannot be empty");
+                        termText.setError("Please add a term name.");
                     }
                     else if (!((!class1NameText.matches("") && !class1UnitText.matches("")) ||
                             (!class2NameText.matches("") && !class2UnitText.matches("")) ||
@@ -129,7 +129,7 @@ public class TermActivity extends ActionBarActivity {
                             (!class4NameText.matches("") && !class4UnitText.matches("")) ||
                             (!class5NameText.matches("") && !class5UnitText.matches("")) ||
                             (!class6NameText.matches("") && !class6UnitText.matches("")))) {
-                        Toast.makeText(TermActivity.this, "Must fill in at least 1 class", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TermActivity.this, "Please add at least 1 class.", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         Term t = (Term)getIntent().getSerializableExtra("TERM");

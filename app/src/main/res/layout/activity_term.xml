@@ -3,13 +3,21 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.shrimpwongton.gpacalculator.TermActivity">
+    tools:context="com.shrimpwongton.gpacalculator.TermActivity"
+    android:gravity="left">
     <View
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@color/primary_dark"
         />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cap"
+        android:src="@drawable/ic_school_white_24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="30dp"
@@ -17,19 +25,20 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
+        android:layout_toRightOf="@id/cap"
         android:text="Term"
         android:textColor="@color/textColor"
         android:id="@+id/term"/>
     <EditText
-        android:layout_width="225dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editTerm"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="88dp"
         android:textSize="30sp"
         android:textColor="@color/textColor"
         android:layout_below="@id/term"
-        android:maxLength="9"/>
+        android:inputType="textPersonName"/>
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
@@ -46,190 +55,206 @@
         android:layout_marginRight="20dp"
         />
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/header"
+        android:layout_marginTop="32dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
+            android:layout_marginRight="16dp"
+            android:layout_gravity="left">
 
             <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="40dp"
+                android:layout_gravity="left">
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="15"
+                    android:layout_height="wrap_content"
+                    android:text="@string/className"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Units"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Grade"/>
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/className"
-                        />
-                    <TextView
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Units"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Grade"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
 
 
-                    <EditText
-                        android:layout_height="wrap_content"
-                        android:layout_width="150dp"
-                        android:id="@+id/class1Class" />
+                <EditText
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="15"
+                    android:id="@+id/class1Class"
+                    android:inputType="textPersonName"/>
 
-                    <EditText
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:ems="10"
-                        android:id="@+id/class1Unit" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/class1Unit" />
 
-                    <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/class1Grade"
-                        android:entries="@array/gradeItems"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp">
-
-
-                    <EditText
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/class2Class" />
-
-                    <EditText
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:ems="10"
-                        android:id="@+id/class2Unit" />
-
-                    <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/class2Grade"
-                        android:entries="@array/gradeItems"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/class1Grade"
+                    android:entries="@array/gradeItems"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
 
 
-                    <EditText
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/class3Class" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="15"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/class2Class"
+                    android:inputType="textPersonName"/>
 
-                    <EditText
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:ems="10"
-                        android:id="@+id/class3Unit" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/class2Unit" />
 
-                    <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/class3Grade"
-                        android:entries="@array/gradeItems"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/class2Grade"
+                    android:entries="@array/gradeItems"/>
+            </LinearLayout>
 
-
-                    <EditText
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/class4Class" />
-
-                    <EditText
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:ems="10"
-                        android:id="@+id/class4Unit" />
-
-                    <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/class4Grade"
-                        android:entries="@array/gradeItems"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
 
 
-                    <EditText
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/class5Class" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="15"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/class3Class"
+                    android:inputType="textPersonName"/>
 
-                    <EditText
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:ems="10"
-                        android:id="@+id/class5Unit" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/class3Unit" />
 
-                    <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/class5Grade"
-                        android:entries="@array/gradeItems"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/class3Grade"
+                    android:entries="@array/gradeItems"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
 
 
-                    <EditText
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/class6Class" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="15"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/class4Class"
+                    android:inputType="textPersonName"/>
 
-                    <EditText
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:ems="10"
-                        android:id="@+id/class6Unit" />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/class4Unit" />
 
-                    <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/class6Grade"
-                        android:entries="@array/gradeItems"/>
-                </LinearLayout>
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/class4Grade"
+                    android:entries="@array/gradeItems"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="15"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/class5Class"
+                    android:inputType="textPersonName"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/class5Unit" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/class5Grade"
+                    android:entries="@array/gradeItems"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="15"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/class6Class"
+                    android:inputType="textPersonName"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/class6Unit" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/class6Grade"
+                    android:entries="@array/gradeItems"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

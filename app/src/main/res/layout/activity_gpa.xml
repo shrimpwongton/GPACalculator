@@ -52,7 +52,8 @@
             android:src="@drawable/ic_trending_flat_white_24dp"
             android:id="@+id/trend"
             android:paddingLeft="16dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="bottom"
+            android:paddingBottom="12dp"/>
     </LinearLayout>
     <ListView
         android:layout_width="fill_parent"

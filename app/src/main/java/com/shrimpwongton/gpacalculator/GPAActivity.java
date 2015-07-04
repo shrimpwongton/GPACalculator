@@ -86,6 +86,8 @@ public class GPAActivity extends ActionBarActivity {
         }
         else
         {
+            textView.setVisibility(View.VISIBLE);
+            listTerms.setAdapter(null);
             database.close();
         }
     }
@@ -112,8 +114,11 @@ public class GPAActivity extends ActionBarActivity {
         GPA = (TextView) findViewById(R.id.GPA);
         trend = (ImageView) findViewById(R.id.trend);
         ArrayList<Class> allClasses = (ArrayList)classData.getAllClasses();
-        if ( allClasses.size() == 0 )
+        if ( allClasses.size() == 0 ) {
             GPA.setText("- . - -");
+            trend.setImageResource(R.drawable.ic_trending_flat_white_24dp);
+            oldGPA = 0.0;
+        }
         else {
             double total = 0.0;
             double totalUnits = 0.0;
@@ -165,6 +170,39 @@ public class GPAActivity extends ActionBarActivity {
                 }
             });
             dialog.show();
+            return true;
+        }
+        else if (id==R.id.action_clear) {
+            int a = database.getTermCount();
+            if (a != 0) {
+                new AlertDialog.Builder(GPAActivity.this)
+                        .setTitle("Delete All Terms")
+                        .setMessage("Are you sure you want to delete all terms?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                ArrayList<Term> terms = (ArrayList) database.getAllTerms();
+                                for (Term a : terms) {
+                                    database.deleteTerm(a);
+                                }
+                                ArrayList<Class> classes = (ArrayList) classData.getAllClasses();
+                                for ( Class a: classes) {
+                                    classData.deleteClass(a);
+                                }
+                                updateCumuGPA();
+                                updateList();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
+            }
+            else {
+                Toast.makeText(GPAActivity.this, "There are no terms to delete", Toast.LENGTH_SHORT).show();
+            }
             return true;
         }
 
