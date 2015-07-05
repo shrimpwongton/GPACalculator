@@ -1,19 +1,19 @@
-**GPA Calculator**
+#**GPA Calculator**
 
 [Google Play Link](https://play.google.com/store/apps/details?id=com.shrimpwongton.gpacalculator)
 
-Description:
+##Description:
 Calculate your GPA, with a Material Design interface!
 
 Keep track of classes, semesters, and see how your GPA changes from semester to semester.
 
-Features:
+##Features:
 - Unlimited amount of semesters with up to 6 classes in each semester.
 - Unit weights.
 - Trend report.
 - Semester and class deletion and modification.
 
-Versions:
+##Versions:
 - Version 1  
   - Base release
 - Version 1.1  
