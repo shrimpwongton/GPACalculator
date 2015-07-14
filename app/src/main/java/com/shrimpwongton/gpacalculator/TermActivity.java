@@ -2,6 +2,7 @@ package com.shrimpwongton.gpacalculator;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -110,11 +111,14 @@ public class TermActivity extends ActionBarActivity {
                     else {
                         Term t = new Term(termName);
                         database.addTerm(t);
-                        t.setId((int)database.getLastID());
+                        t.setId((int) database.getLastID());
                         database.close();
                         addClass(t);
                         claDatabase.close();
-                        finish();
+                        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                            finishAfterTransition();
+                        else
+                            finish();
                     }
                 }
                 else
@@ -138,7 +142,10 @@ public class TermActivity extends ActionBarActivity {
                         database.close();
                         updateClass(t.getId());
                         claDatabase.close();
-                        finish();
+                        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                            finishAfterTransition();
+                        else
+                            finish();
                     }
                 }
 
@@ -331,6 +338,7 @@ public class TermActivity extends ActionBarActivity {
         if (id == R.id.action_delete) {
             Bundle extras = getIntent().getExtras();
             if ( extras != null ) {
+                supportFinishAfterTransition();
                 Term t = (Term) getIntent().getSerializableExtra("TERM");
                 database.deleteTerm(t);
                 ArrayList<Class> a = (ArrayList)claDatabase.getAllClassesWithParentID(t.getId());
@@ -338,7 +346,10 @@ public class TermActivity extends ActionBarActivity {
                     claDatabase.deleteClass(b);
                 }
             }
-            NavUtils.navigateUpFromSameTask(this);
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                finishAfterTransition();
+            else
+                finish();
             return true;
         }
 

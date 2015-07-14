@@ -9,7 +9,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:background="@color/primary_dark"
+        android:background="@color/primary"
         />
     <ImageView
         android:layout_width="wrap_content"
@@ -46,6 +46,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_done_white_24dp"
         android:layout_below="@id/header"
+        android:transitionName="profile"
         fab:fab_colorNormal="@color/fab_primary"
         fab:fab_colorPressed="@color/fab_pressed"
         fab:fab_colorRipple="@color/fab_ripple"

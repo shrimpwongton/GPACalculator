@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -35,11 +36,13 @@ public class GPAActivity extends ActionBarActivity {
     FloatingActionButton fab;
     GPADatabase database = new GPADatabase(this);
     ClassDatabase classData = new ClassDatabase(this);
+    View v1;
     ImageView trend;
     double oldGPA = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         setTitle("GPA Calculator");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gpa);
@@ -48,7 +51,8 @@ public class GPAActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(GPAActivity.this, TermActivity.class);
-                startActivity(i);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(GPAActivity.this, fab,"profile");
+                startActivity(i, options.toBundle());
             }
         });
     }
@@ -65,9 +69,10 @@ public class GPAActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Term t = (Term) listTerms.getItemAtPosition(position);
                 Intent i = new Intent(GPAActivity.this, TermActivity.class);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(GPAActivity.this, fab,"profile");
                 i.putExtra("ID", t.getId());
                 i.putExtra("TERM", t);
-                startActivity(i);
+                startActivity(i, options.toBundle());
             }
         });
     }
