@@ -26,6 +26,9 @@ Keep track of classes, semesters, and see how your GPA changes from semester to 
   - Added clear all terms button.
   - Added landscape when adding a term.
   - Term name can now be unlimited in length.
+- Version 1.2.1
+  - Material Animations (5.0+ only)
+  - Flattened UI
 
 
 
