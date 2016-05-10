@@ -1,11 +1,15 @@
 package com.shrimpwongton.gpacalculator;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.transition.Fade;
+import android.transition.Transition;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +38,16 @@ public class TermActivity extends ActionBarActivity {
     double c1g, c2g, c3g, c4g, c5g, c6g;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Transition fade = new Fade();
+            fade.excludeTarget(android.R.id.statusBarBackground, true);
+            fade.excludeTarget(android.R.id.navigationBarBackground, true);
+            fade.excludeTarget(R.id.action_bar_container, true);
+            fade.excludeTarget(R.id.header, true);
+
+            getWindow().setExitTransition(fade);
+            getWindow().setEnterTransition(fade);
+        }
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setTitle("");
         super.onCreate(savedInstanceState);
@@ -43,6 +57,15 @@ public class TermActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Transition fade = new Fade();
+            fade.excludeTarget(android.R.id.statusBarBackground, true);
+            fade.excludeTarget(android.R.id.navigationBarBackground, true);
+            fade.excludeTarget(R.id.header, true);
+            fade.excludeTarget(R.id.action_bar_container, true);
+            getWindow().setExitTransition(fade);
+            getWindow().setEnterTransition(fade);
+        }
         termText = (EditText) findViewById(R.id.editTerm);
         class1Name = (EditText) findViewById(R.id.class1Class);
         class1Unit = (EditText) findViewById(R.id.class1Unit);
