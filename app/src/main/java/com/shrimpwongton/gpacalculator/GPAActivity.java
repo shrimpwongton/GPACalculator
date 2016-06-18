@@ -5,13 +5,21 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.transition.Fade;
+import android.transition.Transition;
+import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -42,6 +50,15 @@ public class GPAActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Transition fade = new Fade();
+            fade.excludeTarget(android.R.id.statusBarBackground, true);
+            fade.excludeTarget(android.R.id.navigationBarBackground, true);
+            fade.excludeTarget(R.id.header, true);
+            fade.excludeTarget(R.id.action_bar_container, true);
+            getWindow().setExitTransition(fade);
+            getWindow().setEnterTransition(fade);
+        }
         fab = (FloatingActionButton) findViewById(R.id.fab);
         setTitle("GPA Calculator");
         super.onCreate(savedInstanceState);
@@ -51,7 +68,7 @@ public class GPAActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(GPAActivity.this, TermActivity.class);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(GPAActivity.this, fab,"profile");
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(GPAActivity.this, fab, "profile");
                 startActivity(i, options.toBundle());
             }
         });
@@ -60,6 +77,15 @@ public class GPAActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Transition fade = new Fade();
+            fade.excludeTarget(android.R.id.statusBarBackground, true);
+            fade.excludeTarget(android.R.id.navigationBarBackground, true);
+            fade.excludeTarget(R.id.header, true);
+            fade.excludeTarget(R.id.action_bar_container, true);
+            getWindow().setExitTransition(fade);
+            getWindow().setEnterTransition(fade);
+        }
         updateTermGPA();
         updateList();
         updateCumuGPA();
@@ -69,10 +95,42 @@ public class GPAActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Term t = (Term) listTerms.getItemAtPosition(position);
                 Intent i = new Intent(GPAActivity.this, TermActivity.class);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(GPAActivity.this, fab,"profile");
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(GPAActivity.this, fab, "profile");
                 i.putExtra("ID", t.getId());
                 i.putExtra("TERM", t);
                 startActivity(i, options.toBundle());
+            }
+        });
+        listTerms.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           final int pos, long id) {
+                new AlertDialog.Builder(GPAActivity.this)
+                        .setTitle("Delete " + ((Term)listTerms.getItemAtPosition(pos)).getTerm() + "?")
+                        .setMessage("Are you sure you want to delete this term?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                Term t = (Term) listTerms.getItemAtPosition(pos);
+                                List<Class> classes = classData.getAllClassesWithParentID(t.getId());
+                                if (classes != null) {
+                                    for (Class a : classes) {
+                                        classData.deleteClass(a);
+                                    }
+                                }
+                                database.deleteTerm((Term) listTerms.getItemAtPosition(pos));
+                                updateCumuGPA();
+                                updateList();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
+
+                return true;
             }
         });
     }

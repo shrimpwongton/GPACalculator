@@ -15,7 +15,7 @@ public class Term implements Serializable {
     private String term;
     private double GPA;
     private ArrayList<Class> classes;
-    private int mData;
+    //private int mData;
 
     public Term() {
 
@@ -72,9 +72,10 @@ public class Term implements Serializable {
     }
 
     // Calculate the GPA
-    public void calculateGPA () { double total = 0.0; for ( Class c : classes ) { total += c.getUnits(); }}
+    //public void calculateGPA () { double total = 0.0; for ( Class c : classes ) { total += c.getUnits(); }}
     @Override
     public String toString() {
+        //return String.format("%1$-10s %2$10f", term, String.format( "%.2f",  GPA ));
         return term + "\n" + String.format( "%.2f",  GPA );
     }
 }
