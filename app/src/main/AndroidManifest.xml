@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.shrimpwongton.gpacalculator" >
+    package="com.shrimpwongton.gpacalculator">
 
-    <supports-screens android:smallScreens="false"
-        android:normalScreens="true"
+    <supports-screens
         android:largeScreens="true"
-        android:xlargeScreens="false"
-        android:requiresSmallestWidthDp="240" />
+        android:normalScreens="true"
+        android:requiresSmallestWidthDp="240"
+        android:smallScreens="false"
+        android:xlargeScreens="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.MyApp"
-        >
+        android:theme="@style/Theme.MyApp">
         <activity
             android:name=".GPAActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,6 +29,14 @@
             android:label="@string/title_activity_term"
             android:parentActivityName=".GPAActivity"
             android:windowSoftInputMode="stateVisible|adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.shrimpwongton.gpacalculator.GPAActivity" />
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".GPAActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shrimpwongton.gpacalculator.GPAActivity" />

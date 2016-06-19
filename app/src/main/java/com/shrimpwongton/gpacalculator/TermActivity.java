@@ -375,7 +375,11 @@ public class TermActivity extends ActionBarActivity {
                 finish();
             return true;
         }
-
+        else if ( id == android.R.id.home )
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                finishAfterTransition();
+            else
+                finish();
         return super.onOptionsItemSelected(item);
     }
 }

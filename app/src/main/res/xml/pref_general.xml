@@ -1,0 +1,37 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:summary="General"
+        android:title="General" >
+
+        <SwitchPreference
+            android:key="trending_pref"
+            android:title="Trending Line"
+            android:summary="Show Trending Line"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:summary="Colors"
+        android:title="Colors">
+
+        <org.xdty.preference.ColorPreference
+            android:key="ba_color"
+            android:title="Base Color"
+            android:summary="Choose Base Color"
+            app:colors="@array/rainbow"
+            android:defaultValue="@color/md_indigo_500"/>
+        <org.xdty.preference.ColorPreference
+            android:key="accent_color"
+            android:title="Accent Color"
+            android:summary="Choose Accent Color"
+            app:colors="@array/rainbow"
+            android:defaultValue="@color/md_teal_500"/>
+        <org.xdty.preference.ColorPreference
+            android:key="accent_text_color"
+            android:title="Accent Text Color"
+            android:summary="Choose Accent Text Color"
+            app:colors="@array/rainbow"
+            android:defaultValue="@color/md_pink_500"/>
+    </PreferenceCategory>
+</PreferenceScreen>

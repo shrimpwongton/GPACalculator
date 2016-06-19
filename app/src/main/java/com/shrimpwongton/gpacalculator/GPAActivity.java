@@ -4,8 +4,10 @@ import android.app.Application;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -46,6 +48,7 @@ public class GPAActivity extends ActionBarActivity {
     ClassDatabase classData = new ClassDatabase(this);
     View v1;
     ImageView trend;
+    SharedPreferences sharedPrefs;
     double oldGPA = 0.0;
 
     @Override
@@ -59,6 +62,7 @@ public class GPAActivity extends ActionBarActivity {
             getWindow().setExitTransition(fade);
             getWindow().setEnterTransition(fade);
         }
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         setTitle("GPA Calculator");
         super.onCreate(savedInstanceState);
@@ -221,10 +225,11 @@ public class GPAActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
+            String versionName = BuildConfig.VERSION_NAME;
             AlertDialog.Builder dialog = new AlertDialog.Builder(GPAActivity.this);
             dialog.setTitle("About");
-            dialog.setMessage("Simple GPA Calculator with multiple terms, and up to 6 classes per term " +
-                    "\n© 2015 Anthony Wong "
+            dialog.setMessage( "Version " + versionName +
+                    "\n\n© 2015 Anthony Wong "
             );
             dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
@@ -267,6 +272,10 @@ public class GPAActivity extends ActionBarActivity {
                 Toast.makeText(GPAActivity.this, "There are no terms to delete", Toast.LENGTH_SHORT).show();
             }
             return true;
+        }
+        else if ( id == R.id.action_setting) {
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivityForResult(i, 1);
         }
 
         return super.onOptionsItemSelected(item);
