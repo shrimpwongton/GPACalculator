@@ -8,10 +8,10 @@
         <SwitchPreference
             android:key="trending_pref"
             android:title="Trending Line"
-            android:summary="Show Trending Line"
+            android:summary="Hide Trending Line"
             />
     </PreferenceCategory>
-    <PreferenceCategory
+    <!--<PreferenceCategory
         android:summary="Colors"
         android:title="Colors">
 
@@ -33,5 +33,5 @@
             android:summary="Choose Accent Text Color"
             app:colors="@array/rainbow"
             android:defaultValue="@color/md_pink_500"/>
-    </PreferenceCategory>
+    </PreferenceCategory>-->
 </PreferenceScreen>

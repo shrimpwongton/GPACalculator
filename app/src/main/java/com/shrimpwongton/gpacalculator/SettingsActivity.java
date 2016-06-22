@@ -84,7 +84,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         super.onCreate(savedInstanceState);
         setupActionBar();
         addPreferencesFromResource(R.xml.pref_general);
-        bindPreferenceSummaryToValue(findPreference("trending_pref"));
     }
 
     /**

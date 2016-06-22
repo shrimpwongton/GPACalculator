@@ -67,6 +67,11 @@ public class GPAActivity extends ActionBarActivity {
         setTitle("GPA Calculator");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gpa);
+        trend = (ImageView) findViewById(R.id.trend);
+        if ( sharedPrefs.getBoolean("trending_pref", true) )
+            trend.setVisibility(View.INVISIBLE);
+        else
+            trend.setVisibility(View.VISIBLE);
         updateList();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,6 +189,10 @@ public class GPAActivity extends ActionBarActivity {
         if ( allClasses.size() == 0 ) {
             GPA.setText("- . - -");
             trend.setImageResource(R.drawable.ic_trending_flat_white_24dp);
+            if ( sharedPrefs.getBoolean("trending_pref", true) )
+                trend.setVisibility(View.INVISIBLE);
+            else
+                trend.setVisibility(View.VISIBLE);
             oldGPA = 0.0;
         }
         else {
@@ -193,18 +202,21 @@ public class GPAActivity extends ActionBarActivity {
                 total += a.getGrade() * a.getUnits();
                 totalUnits += a.getUnits();
             }
-            if ( total/totalUnits > oldGPA ) {
+            if (total / totalUnits > oldGPA) {
                 trend.setImageResource(R.drawable.ic_trending_up_white_24dp);
-                oldGPA = total/totalUnits;
-            }
-            else if ( total/totalUnits < oldGPA ) {
+                oldGPA = total / totalUnits;
+            } else if (total / totalUnits < oldGPA) {
                 trend.setImageResource(R.drawable.ic_trending_down_white_24dp);
-                oldGPA = total/totalUnits;
-            }
-            else {
+                oldGPA = total / totalUnits;
+            } else {
                 trend.setImageResource(R.drawable.ic_trending_flat_white_24dp);
-                oldGPA = total/totalUnits;
+                oldGPA = total / totalUnits;
             }
+            if ( sharedPrefs.getBoolean("trending_pref", true) )
+                trend.setVisibility(View.INVISIBLE);
+            else
+                trend.setVisibility(View.VISIBLE);
+
             GPA.setText(String.format("%.2f", total / totalUnits));
         }
         classData.close();
