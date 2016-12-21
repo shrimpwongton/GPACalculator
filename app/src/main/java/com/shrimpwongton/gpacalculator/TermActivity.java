@@ -38,16 +38,6 @@ public class TermActivity extends ActionBarActivity {
     double c1g, c2g, c3g, c4g, c5g, c6g;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Transition fade = new Fade();
-            fade.excludeTarget(android.R.id.statusBarBackground, true);
-            fade.excludeTarget(android.R.id.navigationBarBackground, true);
-            fade.excludeTarget(R.id.action_bar_container, true);
-            fade.excludeTarget(R.id.header, true);
-
-            getWindow().setExitTransition(fade);
-            getWindow().setEnterTransition(fade);
-        }
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setTitle("");
         super.onCreate(savedInstanceState);

@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.transition.ChangeBounds;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.util.Log;
@@ -55,10 +56,10 @@ public class GPAActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Transition fade = new Fade();
-            fade.excludeTarget(android.R.id.statusBarBackground, true);
+            /*fade.excludeTarget(android.R.id.statusBarBackground, true);
             fade.excludeTarget(android.R.id.navigationBarBackground, true);
             fade.excludeTarget(R.id.header, true);
-            fade.excludeTarget(R.id.action_bar_container, true);
+            fade.excludeTarget(R.id.action_bar_container, true);*/
             getWindow().setExitTransition(fade);
             getWindow().setEnterTransition(fade);
         }
@@ -88,10 +89,10 @@ public class GPAActivity extends ActionBarActivity {
         super.onResume();
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Transition fade = new Fade();
-            fade.excludeTarget(android.R.id.statusBarBackground, true);
+            /*fade.excludeTarget(android.R.id.statusBarBackground, true);
             fade.excludeTarget(android.R.id.navigationBarBackground, true);
             fade.excludeTarget(R.id.header, true);
-            fade.excludeTarget(R.id.action_bar_container, true);
+            fade.excludeTarget(R.id.action_bar_container, true);*/
             getWindow().setExitTransition(fade);
             getWindow().setEnterTransition(fade);
         }
@@ -104,6 +105,9 @@ public class GPAActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Term t = (Term) listTerms.getItemAtPosition(position);
                 Intent i = new Intent(GPAActivity.this, TermActivity.class);
+                /*ChangeBounds bounds = new ChangeBounds();
+                bounds.setDuration(1000);
+                getWindow().setSharedElementEnterTransition(bounds);*/
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(GPAActivity.this, fab, "profile");
                 i.putExtra("ID", t.getId());
                 i.putExtra("TERM", t);

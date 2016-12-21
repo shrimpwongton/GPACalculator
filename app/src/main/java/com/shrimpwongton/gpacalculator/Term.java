@@ -71,6 +71,14 @@ public class Term implements Serializable {
         this.id = id;
     }
 
+    public double getUnits() {
+        double i = 0;
+        for ( Class c : classes) {
+            i += c.getUnits();
+        }
+        return i;
+    }
+
     // Calculate the GPA
     //public void calculateGPA () { double total = 0.0; for ( Class c : classes ) { total += c.getUnits(); }}
     @Override
