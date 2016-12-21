@@ -29,6 +29,9 @@ Keep track of classes, semesters, and see how your GPA changes from semester to 
 - Version 1.2.1
   - Material Animations (5.0+ only)
   - Flattened UI
+- Version 1.3.0
+  - Improved Animations (5.0+ only)
+  - Hide the Trending Line
 
 
 
