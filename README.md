@@ -32,6 +32,12 @@ Keep track of classes, semesters, and see how your GPA changes from semester to 
 - Version 1.3.0
   - Improved Animations (5.0+ only)
   - Hide the Trending Line
+- Version 1.4.1
+  - Split screen mode (Nougat 7.0+)
+  - Unit totals
+  - Bug Fixes
+  
+  ** Due to Admob Publisher ID's, project will no longer be updated to GitHub.
 
 
 
